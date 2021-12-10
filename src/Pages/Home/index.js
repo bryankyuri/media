@@ -5,7 +5,7 @@ export default class index extends Component {
   render() {
     return (
       <div>
-        <Link to="/maintenance">Maintenance</Link>
+        <Link to="/maintenance">Maintenance Staging</Link>
       </div>
     );
   }
