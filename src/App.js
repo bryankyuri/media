@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './Routes';
+import "./Styles/app.scss";
+
 
 class App extends Component {
   render() {

@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { AnimatePresence, motion } from "framer-motion";
+import { listRoutes } from "./listRoutes";
 
 /* loader component for Suspense*/
 import PageLoader from "./Components/Common/PageLoader";
@@ -12,18 +14,14 @@ import Base from "./Components/Layout/Base";
 /* Used to render a lazy component with react-router */
 const waitFor = (Tag) => (props) => <Tag {...props} />;
 
-const Home = lazy(() => import("./Pages/Home"));
-const NotFound = lazy(() => import("./Pages/Notfound/NotFound"));
-const Maintenance = lazy(() => import("./Pages/Maintenance"));
-
 // List of routes that uses the page layout
 // listed here to Switch between layouts
 // depending on the current pathname
 
 const Routes = ({ location }) => {
   const currentKey = location.pathname.split("/")[1] || "/";
-  const timeout = { enter: 500, exit: 500 };
-  const animationName = "rag-fadeIn";
+  const timeout = { enter: 300, exit: 300 };
+  const animationName = "animate__animated fadeIn";
 
   return (
     <Base>
@@ -36,16 +34,36 @@ const Routes = ({ location }) => {
         >
           <div>
             <Suspense fallback={<PageLoader />}>
-              <Switch location={location}>
-                <Route exact path="/" component={waitFor(Home)} />
-                <Route exact path="/notfound" component={waitFor(NotFound)} />
-                <Route exact path="/maintenance" component={waitFor(Maintenance)} />
-                <Redirect
-                  to={{
-                    pathname: "/notfound",
-                  }}
-                />
-              </Switch>
+              <AnimatePresence exitBeforeEnter>
+                <Switch location={location} key={location.pathname}>
+                  {listRoutes.map((item, index) => (
+                    <motion.div
+                    initial={{ opacity: 0.4 }}
+                    animate={{ opacity: 1}}
+                      transition={{ duration: 0.4 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      <Route
+                        exact={item.exact}
+                        path={item.path}
+                        component={waitFor(item.component)}
+                      />
+                    </motion.div>
+                  ))}
+                  <motion.div
+                    initial={{ opacity: 0.4 }}
+                    animate={{ opacity: 1}}
+                    transition={{ duration: 0.4 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <Redirect
+                      to={{
+                        pathname: "/maintenance",
+                      }}
+                    />
+                  </motion.div>
+                </Switch>
+              </AnimatePresence>
             </Suspense>
           </div>
         </CSSTransition>

@@ -1,0 +1,27 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: green;
+}
+.container__main {
+  // width: calc(100%;
+  height: 72px;
+  max-width: 1440px;
+  padding: 16px 24px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.col__menu {
+  .menu__item {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding: 8px 12px;
+    margin-right: 24px;
+    
+  }
+}
