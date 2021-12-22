@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className={Style.wrapper} id="Header">
       <div className={Style.container__main}>
-        <div className={Style.col__logo}>logo</div>
+        <div className={Style.col__logo}>LOGO</div>
         <div className={Style.col__menu}>
           <Link to="" className={Style.menu__item}>
             Home
