@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Style from "./Header.module.scss";
 
@@ -9,19 +9,25 @@ const Header = () => {
         <div className={Style.col__logo}>logo</div>
         <div className={Style.col__menu}>
           <Link to="" className={Style.menu__item}>
-            About
+            Home
+          </Link>
+          <Link to="" className={Style.menu__item}>
+            Ticket
           </Link>
           <Link to="/line-up" className={Style.menu__item}>
             Line Up
           </Link>
-          <Link to="" className={Style.menu__item}>
-            Ticket
+          <Link to="/line-up" className={Style.menu__item}>
+            Schedule
+          </Link>
+          <Link to="/line-up" className={Style.menu__item}>
+            Map
           </Link>
           <Link to="" className={Style.menu__item}>
             Merch
           </Link>
           <Link to="" className={Style.menu__item}>
-            Media
+            Be Part of Us
           </Link>
         </div>
       </div>

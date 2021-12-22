@@ -1,7 +1,7 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { AnimatePresence, motion } from "framer-motion";
+// import { AnimatePresence, motion } from "framer-motion";
 import { listRoutes } from "./listRoutes";
 
 /* loader component for Suspense*/
@@ -22,6 +22,7 @@ const Routes = ({ location }) => {
   const currentKey = location.pathname.split("/")[1] || "/";
   const timeout = { enter: 300, exit: 300 };
   const animationName = "animate__animated fadeIn";
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <Base>
@@ -32,40 +33,42 @@ const Routes = ({ location }) => {
           classNames={animationName}
           exit={false}
         >
-          <div>
-            <Suspense fallback={<PageLoader />}>
-              <AnimatePresence exitBeforeEnter>
-                <Switch location={location} key={location.pathname}>
-                  {listRoutes.map((item, index) => (
-                    <motion.div
+          <Suspense fallback={<PageLoader />}>
+            {/* <AnimatePresence exitBeforeEnter> */}
+              <Switch location={location} key={location.pathname}>
+                {listRoutes().map((item, index) => {
+                  return (
+                    // <motion.div
+                    //   // key={"item"+ index}
+                    //   initial={{ opacity: 0.4 }}
+                    //   animate={{ opacity: 1 }}
+                    //   transition={{ duration: 0.4 }}
+                    //   exit={{ opacity: 0 }}
+                    // >
+                    <Route
+                      exact={item.exact}
+                      path={item.path}
+                      component={waitFor(item.component)}
+                      key={"item" + index}
+                    />
+                    // </motion.div>
+                  );
+                })}
+                {/* <motion.div
                     initial={{ opacity: 0.4 }}
-                    animate={{ opacity: 1}}
-                      transition={{ duration: 0.4 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      <Route
-                        exact={item.exact}
-                        path={item.path}
-                        component={waitFor(item.component)}
-                      />
-                    </motion.div>
-                  ))}
-                  <motion.div
-                    initial={{ opacity: 0.4 }}
-                    animate={{ opacity: 1}}
+                    animate={{ opacity: 1 }}
                     transition={{ duration: 0.4 }}
                     exit={{ opacity: 0 }}
-                  >
-                    <Redirect
-                      to={{
-                        pathname: "/maintenance",
-                      }}
-                    />
-                  </motion.div>
-                </Switch>
-              </AnimatePresence>
-            </Suspense>
-          </div>
+                  > */}
+                <Redirect
+                  to={{
+                    pathname: "/maintenance",
+                  }}
+                />
+                {/* </motion.div> */}
+              </Switch>
+            {/* </AnimatePresence> */}
+          </Suspense>
         </CSSTransition>
       </TransitionGroup>
     </Base>
