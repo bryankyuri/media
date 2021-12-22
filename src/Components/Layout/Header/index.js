@@ -11,22 +11,22 @@ const Header = () => {
           <Link to="" className={Style.menu__item}>
             Home
           </Link>
-          <Link to="" className={Style.menu__item}>
+          <Link to="ticket" className={Style.menu__item}>
             Ticket
           </Link>
           <Link to="/line-up" className={Style.menu__item}>
             Line Up
           </Link>
-          <Link to="/line-up" className={Style.menu__item}>
+          <Link to="/schedule" className={Style.menu__item}>
             Schedule
           </Link>
-          <Link to="/line-up" className={Style.menu__item}>
+          <Link to="/map" className={Style.menu__item}>
             Map
           </Link>
-          <Link to="" className={Style.menu__item}>
+          <Link to="merch" className={Style.menu__item}>
             Merch
           </Link>
-          <Link to="" className={Style.menu__item}>
+          <Link to="be-part-of-us" className={Style.menu__item}>
             Be Part of Us
           </Link>
         </div>
